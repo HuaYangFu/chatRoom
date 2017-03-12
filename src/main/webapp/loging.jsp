@@ -14,7 +14,6 @@
         <script type="text/javascript" src="js/loging.js"></script>
     </head>
     <body>
-    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,700' rel='stylesheet' type='text/css'>
         <form id="myForm" action="vertify" method="post">
             <div class="container">
                 <div class="profile">
@@ -24,11 +23,11 @@
                     <div class="profile__form">
                         <div class="profile__fields">
                             <div class="field">
-                                <input type="text" id="fieldUser" class="input" required pattern=.*\S.* />
+                                <input type="text" id="fieldUser" class="input"/>
                                 <label for="fieldUser" class="label">Username</label>
                             </div>
                             <div class="field">
-                                <input type="password" id="fieldPassword" class="input" required pattern=.*\S.* />
+                                <input type="password" id="fieldPassword" class="input"/>
                                 <label for="fieldPassword" class="label">Password</label>
                             </div>
                             <div class="profile__footer">
