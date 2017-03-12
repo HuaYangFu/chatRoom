@@ -7,49 +7,32 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>Pretech blog testing web sockets</title>
-  </head>
-  <body>
-  <div>
-    <input type="text" id="userinput" /> <br>
-    <input type="submit" value="Send Message to Server" onclick="start()" />
-  </div>
-  <div id="messages"></div>
-    <script type="text/javascript">
-      var webSocket = new WebSocket('ws://localhost:8080/websocket');
-
-      webSocket.onerror = function(event) {
-        onError(event)
-      };
-
-      webSocket.onopen = function(event) {
-        onOpen(event)
-      };
-
-      webSocket.onmessage = function(event) {
-        onMessage(event)
-      };
-
-      function onMessage(event) {
-        document.getElementById('messages').innerHTML += '<br />'
-                + event.data;
-      }
-
-      function onOpen(event) {
-        document.getElementById('messages').innerHTML = 'Now Connection established';
-      }
-
-      function onError(event) {
-        alert(event.data);
-      }
-
-      function start() {
-        var text = document.getElementById("userinput").value;
-
-        webSocket.send(text);
-        return false;
-      }
-    </script>
-  </body>
+    <head>
+      <title>Pretech blog testing web sockets</title>
+      <script type="text/javascript" src="js/chat.js"></script>
+      <style type="text/css">
+        #userinput{
+          height: 30px;
+          width: 96%;
+        }
+        #send{
+          height: 30px;
+        }
+      </style>
+    </head>
+    <body>
+    <h1>chat room</h1>
+    <hr>
+    <div style="float: left;width: 30%;height:70%;background-color: greenyellow;">
+      sss
+    </div>
+    <div id="messages" style="width:100%;height:70%;background-color: red;">
+    </div>
+    <hr>
+    <div>
+      <input type="button" id="send" value="Send" onclick="start()"/>
+      <input type="text" id="userinput" onkeydown="keyStart()"/>
+    </div>
+    </body>
 </html>
+
