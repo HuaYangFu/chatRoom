@@ -6,5 +6,8 @@
          id="WebApp_ID" version="3.0">
 
     <display-name>chatRoom</display-name>
+    <welcome-file-list>
+        <welcome-file>loging.jsp</welcome-file>
+    </welcome-file-list>
 
 </web-app>
