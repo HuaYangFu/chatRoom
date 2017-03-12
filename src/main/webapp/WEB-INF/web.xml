@@ -6,8 +6,81 @@
          id="WebApp_ID" version="3.0">
 
     <display-name>chatRoom</display-name>
+
     <welcome-file-list>
         <welcome-file>loging.jsp</welcome-file>
     </welcome-file-list>
 
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:mvc-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- 靜態資源加載 -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.ico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.gif</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.jpg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.png</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.bmp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.jpeg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.swf</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.flv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.xml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.txt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.htm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
 </web-app>
