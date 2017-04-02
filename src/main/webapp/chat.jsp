@@ -32,6 +32,7 @@
     <div>
       <input type="button" id="send" value="Send" onclick="start()"/>
       <input type="text" id="userinput" onkeydown="keyStart()"/>
+      <input type="hidden" id="to" value=""/>
     </div>
     </body>
 </html>

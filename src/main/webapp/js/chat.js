@@ -16,8 +16,9 @@ webSocket.onmessage = function(event) {
 };
 
 function onMessage(event) {
+    var message = JSON.parse(event.data);
     document.getElementById('messages').innerHTML += '<br />'
-        + event.data;
+        + message.content;
 }
 
 function onOpen(event) {
@@ -29,16 +30,25 @@ function onError(event) {
 }
 
 function start() {
-    var text = document.getElementById("userinput").value;
-
-    webSocket.send(text);
+    var content = document.getElementById("userinput").value;
+    var to = document.getElementById("to").value;
+    var json = JSON.stringify({
+        "to":to,
+        "content":content
+    });
+    webSocket.send(json);
     return false;
 }
 function keyStart() {
     var e = window.event;
     if(e.keyCode == 13){
-        var text = document.getElementById("userinput").value;
-        webSocket.send(text);
+        var content = document.getElementById("userinput").value;
+        var to = document.getElementById("to").value;
+        var json = JSON.stringify({
+            "to":to,
+            "content":content
+        });
+        webSocket.send(json);
         return false;
     }
 }
