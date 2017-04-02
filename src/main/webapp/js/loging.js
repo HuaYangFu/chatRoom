@@ -1,5 +1,5 @@
 function formSubmit() {
-  document.getElementById("myForm").submit()
+  document.getElementById("myForm").submit();
 }
 window.onload = function() {
   document.getElementById('toggleProfile').addEventListener('click', function () {
