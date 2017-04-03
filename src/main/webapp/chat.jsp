@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 傅華暘
@@ -7,33 +8,33 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Pretech blog testing web sockets</title>
-    <script type="text/javascript" src="js/chat.js"></script>
-    <style type="text/css">
-        #userinput{
-            height: 30px;
-            width: 96%;
-        }
-        #send{
-            height: 30px;
-        }
-    </style>
-</head>
-<body>
-<h1>chat room</h1>
-<hr>
-<div style="float: left;width: 30%;height:70%;background-color: greenyellow;">
-    sss
-</div>
-<div id="messages" style="overflow-x: hidden;height:70%;background-color: red;">
-</div>
-<hr>
-<div>
-    <input type="button" id="send" value="Send" onclick="start()"/>
-    <input type="text" id="userinput" onkeydown="keyStart()"/>
-    <input type="hidden" id="to" value=""/>
-</div>
-</body>
+    <head>
+        <title>Pretech blog testing web sockets</title>
+        <script type="text/javascript" src="js/chat.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/chat.css">
+        <script>
+            function selectUser(id) {
+                document.getElementById("to").value = id;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>chat room</h1>
+        <hr>
+        <div id="left">
+            <c:forEach items="${userList}" var="user">
+            <div class="userInfo" onclick="selectUser(${user.id});">
+                <c:out value="${user.name}"/>
+            </div><br/>
+            </c:forEach>
+        </div>
+        <div id="messages"></div>
+        <hr>
+        <div>
+            <input type="button" id="send" value="Send" onclick="start()"/>
+            <input type="text" id="userinput" onkeydown="keyStart()"/>
+            <input type="hidden" id="to" value=""/>
+        </div>
+    </body>
 </html>
 

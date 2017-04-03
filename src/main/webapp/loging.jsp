@@ -19,9 +19,9 @@
         <button class="profile__avatar" id="toggleProfile">
             <img src="https://pbs.twimg.com/profile_images/554631714970955776/uzPxPPtr.jpeg" alt="Avatar" />
         </button>
-        <form id="myForm" action="vertify" method="post">
-            <div class="profile__form">
-                <div class="profile__fields">
+        <div class="profile__form">
+            <div class="profile__fields">
+                <form id="myForm" action="vertify" method="post">
                     <div class="field">
                         <input type="text" id="fieldUser" class="input"/>
                         <label for="fieldUser" class="label">Username</label>
@@ -30,12 +30,13 @@
                         <input type="password" id="fieldPassword" class="input"/>
                         <label for="fieldPassword" class="label">Password</label>
                     </div>
-                    <div class="profile__footer">
-                        <button class="btn" onclick="formSubmit()">Login</button>
-                    </div>
+                </form>
+                <div class="profile__footer">
+                    <button class="btn" onclick="formSubmit()">Login</button>
+                    <a href="/setupPage"><button class="btn" >Setup</button></a>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 </body>
