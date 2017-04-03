@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -20,22 +21,28 @@ public class UserController {
     private UserDao userDao;
 
     @RequestMapping("/vertify")
-    public ModelAndView test() {
-        ModelAndView MV = new ModelAndView("chat");
-        List<User> userList = userDao.findAllUser();
-        MV.addObject("userList",userList);
+    public ModelAndView logingVertify(@RequestParam String account,@RequestParam char[] password) {
+        boolean accountIsNotEmpty = (account != null && account.length() != 0);
+        boolean passwordIsNotEmpty = (password != null && password.length != 0);
+        ModelAndView MV = new ModelAndView();
+        if(accountIsNotEmpty && passwordIsNotEmpty) {
+            MV.setViewName("chat");
+            List<User> userList = userDao.findAllUser();
+            MV.addObject("userList", userList);
+        }
+        else{
+            MV.setViewName("loging");
+        }
         return MV;
     }
 
     @RequestMapping("/setupPage")
-    public String test2() {
-        System.out.println("from setupPage use test2");
+    public String sendToSetUpPage() {
         return "setup";
     }
 
     @RequestMapping("/setupUser")
-    public String test3(@ModelAttribute User user) {
-        System.out.println("from setupUser use test3");
+    public String creatNewUser(@ModelAttribute User user) {
         try {
             if(user != null){
                 userDao.insert(user);

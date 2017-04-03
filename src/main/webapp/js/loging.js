@@ -1,7 +1,5 @@
 function formSubmit() {
-
   document.getElementById("myForm").submit();
-
 }
 window.onload = function() {
 

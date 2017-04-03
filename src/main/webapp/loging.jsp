@@ -23,11 +23,11 @@
             <div class="profile__fields">
                 <form id="myForm" action="vertify" method="post">
                     <div class="field">
-                        <input type="text" id="fieldUser" class="input"/>
-                        <label for="fieldUser" class="label">Username</label>
+                        <input name="account" type="text" id="fieldUser" class="input"/>
+                        <label for="fieldUser" class="label">Account</label>
                     </div>
                     <div class="field">
-                        <input type="password" id="fieldPassword" class="input"/>
+                        <input name="password" type="password" id="fieldPassword" class="input"/>
                         <label for="fieldPassword" class="label">Password</label>
                     </div>
                 </form>

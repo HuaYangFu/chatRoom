@@ -1,6 +1,7 @@
 package chatRoom.dao;
 
 import chatRoom.entity.User;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,5 +33,9 @@ public class UserDao {
         return sessionFactory.getCurrentSession().createQuery(" FROM "+User.class.getName()).list();
     }
 
+    @Transactional
+    public List<User> vertifyUser(String account, char[] password) {
+        return sessionFactory.getCurrentSession().createQuery(" FROM "+User.class.getName()).list();
+    }
 
 }
