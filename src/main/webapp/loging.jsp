@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/loging.css">
     <script type="text/javascript" src="js/loging.js"></script>
 </head>
 <body>
