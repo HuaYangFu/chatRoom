@@ -15,6 +15,8 @@ import java.util.List;
 @Repository
 public class UserDao {
 
+    private User user;
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -34,8 +36,25 @@ public class UserDao {
     }
 
     @Transactional
-    public List<User> vertifyUser(String account, char[] password) {
-        return sessionFactory.getCurrentSession().createQuery(" FROM "+User.class.getName()).list();
+    public User findUserByProvide(String account, char[] password) {
+        User user = null;
+        try {
+            String q = "from User where account = :account and password = :password";
+            Query query = sessionFactory.getCurrentSession().createQuery(q);
+            query.setParameter("account",account);
+            query.setParameter("password",password);
+            List<User> users = query.list();
+            if(users != null){
+                for(User temp : users){
+                    if(temp != null){
+                        user = temp;
+                    }
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return user;
     }
 
 }

@@ -2,6 +2,7 @@ package webSocket;
 
 import chatRoom.entity.Message;
 import chatRoom.entity.User;
+import chatRoom.util.UserUtil;
 
 import java.io.IOException;
 import java.util.*;
@@ -23,12 +24,14 @@ import javax.xml.ws.WebServiceContext;
 )
 public class WebSocket {
 
-    private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
+    private static Map<User,Session> clients = new HashMap<>();
+
+    private UserUtil userUtil = new UserUtil();
 
     @OnMessage
     public void onMessage(Message message, Session session) throws IOException, EncodeException {
         if(message.getTo() != null && message.getTo().length() != 0){
-            sendToOne(message);
+            sendToOne(message,session);
         }
         else{
             sendToALL(message);
@@ -38,29 +41,36 @@ public class WebSocket {
     @OnOpen
     public void onOpen (Session session) {
         // Add session to the connected sessions set
-        clients.add(session);
+        User user = userUtil.getUser();
+        clients.put(user,session);
     }
 
     @OnClose
     public void onClose (Session session) {
         // Remove session from the connected sessions set
-        clients.remove(session);
+        User user = userUtil.getUser();
+        clients.remove(user);
     }
 
     private void sendToALL(Message message) throws IOException, EncodeException {
-        System.out.print("send to all");
         synchronized(clients){
-            for(Session client : clients){
-                client.getBasicRemote().sendObject(message);
+            Set<User> users = clients.keySet();
+            for(User temp : users){
+                Session session = clients.get(temp);
+                session.getBasicRemote().sendObject(message);
             }
         }
     }
 
-    private void sendToOne(Message message) throws IOException, EncodeException {
-        System.out.print("send to one");
+    private void sendToOne(Message message,Session selfsession) throws IOException, EncodeException {
         synchronized(clients){
-            for(Session client : clients){
-                client.getBasicRemote().sendObject(message);
+            Set<User> users = clients.keySet();
+            for(User temp : users){
+                if(temp.getId() == Long.valueOf(message.getTo())){
+                    Session session = clients.get(temp);
+                    session.getBasicRemote().sendObject(message);
+                    selfsession.getBasicRemote().sendObject(message);
+                }
             }
         }
     }
