@@ -12,6 +12,12 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="css/loging.css">
     <script type="text/javascript" src="js/loging.js"></script>
+    <script>
+        var error = "${error}";
+        if(error != null && error.length != 0){
+            alert(error);
+        }
+    </script>
 </head>
 <body>
 <div class="container">

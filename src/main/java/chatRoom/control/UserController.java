@@ -2,6 +2,7 @@ package chatRoom.control;
 
 import chatRoom.dao.UserDao;
 import chatRoom.entity.User;
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -33,6 +36,7 @@ public class UserController {
                 MV.addObject("userList", userList);
             }
         }
+        MV.addObject("error","user is not exit");
         return MV;
     }
 
@@ -42,14 +46,18 @@ public class UserController {
     }
 
     @RequestMapping("/setupUser")
-    public String creatNewUser(@ModelAttribute User user) {
+    public ModelAndView creatNewUser(@ModelAttribute User user) throws IOException {
+        ModelAndView MV = new ModelAndView("loging");
         try {
             if(user != null){
                 userDao.insert(user);
             }
         }catch (Exception e){
             e.printStackTrace();
+            MV.addObject("error","account is Duplicate please retry again");
+            MV.setViewName("setup");
+            return MV;
         }
-        return "loging";
+        return MV;
     }
 }

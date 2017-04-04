@@ -9,6 +9,12 @@
 <html>
 <head>
     <title>setup</title>
+    <script>
+        var error = "${error}";
+        if(error != null && error.length != 0){
+            alert(error);
+        }
+    </script>
 </head>
 <body>
     <form action="setupUser" method="post">
