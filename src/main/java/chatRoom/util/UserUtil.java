@@ -12,10 +12,19 @@ import java.util.Map;
  */
 public class UserUtil {
 
+    private UserUtil(){}
+
+    private static UserUtil uniqueInstance;
+
     @Autowired
     private HttpSession session;
 
     private static Map<HttpSession,User> userMap = new HashMap();
+
+    public static synchronized UserUtil getInstance() {
+        if(uniqueInstance == null ) {uniqueInstance = new UserUtil();}
+        return uniqueInstance;
+    }
 
     public Map<HttpSession, User> getUserMap() {
         return userMap;
@@ -24,6 +33,9 @@ public class UserUtil {
     public User getUser() {
         User user = userMap.get(session);
         return user;
+    }
+    public void setUser(User user) {
+        userMap.put(session,user);
     }
 
 }

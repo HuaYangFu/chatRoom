@@ -2,6 +2,7 @@ package chatRoom.control;
 
 import chatRoom.dao.UserDao;
 import chatRoom.entity.User;
+import chatRoom.util.UserUtil;
 import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,7 @@ public class UserController {
         if(accountIsNotEmpty && passwordIsNotEmpty) {
             User user = userDao.findUserByProvide(account,password);
             if(user != null){
+                UserUtil.getInstance().setUser(user);
                 MV.setViewName("chat");
                 List<User> userList = userDao.findAllUser();
                 MV.addObject("userList", userList);

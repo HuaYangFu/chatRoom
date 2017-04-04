@@ -26,7 +26,7 @@ public class WebSocket {
 
     private static Map<User,Session> clients = new HashMap<>();
 
-    private UserUtil userUtil = new UserUtil();
+    private UserUtil userUtil = UserUtil.getInstance();
 
     @OnMessage
     public void onMessage(Message message, Session session) throws IOException, EncodeException {
