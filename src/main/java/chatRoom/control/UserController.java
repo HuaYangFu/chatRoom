@@ -24,14 +24,14 @@ public class UserController {
     public ModelAndView logingVertify(@RequestParam String account,@RequestParam char[] password) {
         boolean accountIsNotEmpty = (account != null && account.length() != 0);
         boolean passwordIsNotEmpty = (password != null && password.length != 0);
-        ModelAndView MV = new ModelAndView();
+        ModelAndView MV = new ModelAndView("loging");
         if(accountIsNotEmpty && passwordIsNotEmpty) {
-            MV.setViewName("chat");
-            List<User> userList = userDao.findAllUser();
-            MV.addObject("userList", userList);
-        }
-        else{
-            MV.setViewName("loging");
+            User user = userDao.findUserByProvide(account,password);
+            if(user != null){
+                MV.setViewName("chat");
+                List<User> userList = userDao.findAllUser();
+                MV.addObject("userList", userList);
+            }
         }
         return MV;
     }

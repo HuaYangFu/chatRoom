@@ -21,11 +21,11 @@
     <body>
         <h1>chat room</h1>
         <hr>
-        <div id="left">
+        <div id="left" style="overflow-y: scroll">
             <c:forEach items="${userList}" var="user">
-            <div class="userInfo" onclick="selectUser(${user.id});">
+            <button class="userInfo" onclick="selectUser(${user.id});">
                 <c:out value="${user.name}"/>
-            </div><br/>
+            </button>
             </c:forEach>
         </div>
         <div id="messages"></div>
