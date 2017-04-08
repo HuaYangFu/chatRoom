@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by 傅華暘 on 2017/3/12.
@@ -33,9 +35,11 @@ public class UserController {
             User user = userDao.findUserByProvide(account,password);
             if(user != null){
                 UserUtil.getInstance().setUser(user);
-                MV.setViewName("chat");
+                User self = UserUtil.getInstance().getUser();
+                MV.addObject("self", self);
                 List<User> userList = userDao.findAllUser();
                 MV.addObject("userList", userList);
+                MV.setViewName("chat");
             }
         }
         MV.addObject("error","user is not exit");

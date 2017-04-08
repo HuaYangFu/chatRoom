@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>setup</title>
+    <link rel="stylesheet" type="text/css" href="css/setup.css">
     <script>
         var error = "${error}";
         if(error != null && error.length != 0){
@@ -17,11 +18,15 @@
     </script>
 </head>
 <body>
-    <form action="setupUser" method="post">
-        <input name="name" type="text" placeholder="name"/><br/>
-        <input name="account" type="text" placeholder="account"/><br/>
-        <input name="password" type="password" placeholder="password"/><br/>
-        <input type="submit" value="submit"/>
-    </form>
+<div class="login-page">
+    <div class="form">
+        <form class="setup-form" action="setupUser" method="post">
+            <input name="name" type="text" placeholder="username"/>
+            <input name="account" type="text" placeholder="account"/>
+            <input name="password" type="password" placeholder="password"/>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

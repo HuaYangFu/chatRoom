@@ -28,13 +28,15 @@
             </button>
             </c:forEach>
         </div>
-        <div id="messages"></div>
-        <hr>
-        <div>
-            <input type="button" id="send" value="Send" onclick="start()"/>
-            <input type="text" id="userinput" onkeydown="keyStart()"/>
-            <input type="hidden" id="to" value=""/>
+        <div id="dialog">
+            <div id="messages"></div>
+            <div id="send">
+                <input type="text" id="userinput" placeholder="message" onkeydown="keyStart(event)"/>
+            </div>
         </div>
+        <input type="hidden" id="to" value=""/>
+        <input type="hidden" id="self" value="${self.name}"/>
+        <hr>
     </body>
 </html>
 

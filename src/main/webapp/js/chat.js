@@ -18,7 +18,7 @@ webSocket.onmessage = function(event) {
 function onMessage(event) {
     var message = JSON.parse(event.data);
     document.getElementById('messages').innerHTML += '<br />'
-        + message.content;
+        + message.from +" : "+ message.content;
 }
 
 function onOpen(event) {
@@ -31,17 +31,20 @@ function onError(event) {
 
 function start() {
     var content = document.getElementById("userinput").value;
+    document.getElementById("userinput").value = null;
     var to = document.getElementById("to").value;
+    var self = document.getElementById("self").value;
     var json = JSON.stringify({
         "to":to,
+        "from":self.toString(),
         "content":content
     });
     webSocket.send(json);
     return false;
 }
-function keyStart() {
-    var e = window.event;
-    if(e.keyCode == 13){
+function keyStart(e) {
+    var code = e.keyCode ? e.keyCode : e.which;
+    if(code === 13) {
         start();
     }
 }
