@@ -39,9 +39,13 @@ public class WebSocket {
     }
 
     @OnOpen
-    public void onOpen (Session session) {
+    public void onOpen (Session session) throws IOException, EncodeException {
         User user = userUtil.getUser();
         clients.put(session,user);
+        Message message = new Message();
+        message.setFrom(user.getName());
+        message.setContent("login");
+        sendToALL(message);
     }
 
     @OnClose

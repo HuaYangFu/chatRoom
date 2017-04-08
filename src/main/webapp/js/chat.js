@@ -22,7 +22,7 @@ function onMessage(event) {
 }
 
 function onOpen(event) {
-    document.getElementById('messages').innerHTML = 'Now Connection established';
+    document.getElementById('messages').innerHTML = 'welcome';
 }
 
 function onError(event) {
