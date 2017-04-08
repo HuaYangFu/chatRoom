@@ -29,12 +29,10 @@
             <div class="profile__fields">
                 <form id="myForm" action="vertify" method="post">
                     <div class="field">
-                        <input name="account" type="text" id="fieldUser" class="input"/>
-                        <label for="fieldUser" class="label">Account</label>
+                        <input name="account" type="text" placeholder="Account" id="fieldUser" class="input"/>
                     </div>
                     <div class="field">
-                        <input name="password" type="password" id="fieldPassword" class="input"/>
-                        <label for="fieldPassword" class="label">Password</label>
+                        <input name="password" type="password" placeholder="Password" id="fieldPassword" class="input"/>
                     </div>
                 </form>
                 <div class="profile__footer">

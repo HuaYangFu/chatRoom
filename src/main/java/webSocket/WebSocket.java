@@ -24,7 +24,7 @@ import javax.xml.ws.WebServiceContext;
 )
 public class WebSocket {
 
-    private static Map<User,Session> clients = new HashMap<>();
+    private static Map<Session,User> clients = new HashMap<>();
 
     private UserUtil userUtil = UserUtil.getInstance();
 
@@ -40,23 +40,24 @@ public class WebSocket {
 
     @OnOpen
     public void onOpen (Session session) {
-        // Add session to the connected sessions set
         User user = userUtil.getUser();
-        clients.put(user,session);
+        clients.put(session,user);
     }
 
     @OnClose
-    public void onClose (Session session) {
-        // Remove session from the connected sessions set
-        User user = userUtil.getUser();
-        clients.remove(user);
+    public void onClose (Session session) throws IOException, EncodeException {
+        User user = clients.get(session);
+        clients.remove(session);
+        Message message = new Message();
+        message.setFrom(user.getName());
+        message.setContent("disconnected!");
+        sendToALL(message);
     }
 
     private void sendToALL(Message message) throws IOException, EncodeException {
         synchronized(clients){
-            Set<User> users = clients.keySet();
-            for(User temp : users){
-                Session session = clients.get(temp);
+            Set<Session> sessions = clients.keySet();
+            for(Session session : sessions){
                 session.getBasicRemote().sendObject(message);
             }
         }
@@ -64,10 +65,10 @@ public class WebSocket {
 
     private void sendToOne(Message message,Session selfsession) throws IOException, EncodeException {
         synchronized(clients){
-            Set<User> users = clients.keySet();
-            for(User temp : users){
+            Set<Session> users = clients.keySet();
+            for(Session session : users){
+                User temp = clients.get(session);
                 if(temp.getId() == Long.valueOf(message.getTo())){
-                    Session session = clients.get(temp);
                     session.getBasicRemote().sendObject(message);
                     selfsession.getBasicRemote().sendObject(message);
                 }
