@@ -11,10 +11,6 @@ webSocket.onopen = function(event) {
     onOpen(event)
 };
 
-webSocket.close = function(event) {
-    close(event)
-};
-
 webSocket.onmessage = function(event) {
     onMessage(event)
 };
@@ -29,13 +25,14 @@ function onOpen(event) {
     document.getElementById('messages').innerHTML = 'Now Connection established';
 }
 
-function close(event) {
-    document.getElementById('messages').innerHTML = 'user is logout';
-}
-
 function onError(event) {
     alert(event.data);
 }
+
+window.onbeforeunload = function() {
+    webSocket.onclose = function () {};
+    webSocket.close()
+};
 
 function start() {
     var content = document.getElementById("userinput").value;
