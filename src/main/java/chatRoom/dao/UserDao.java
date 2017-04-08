@@ -44,13 +44,7 @@ public class UserDao {
             query.setParameter("account",account);
             query.setParameter("password",password);
             List<User> users = query.list();
-            if(users != null){
-                for(User temp : users){
-                    if(temp != null){
-                        user = temp;
-                    }
-                }
-            }
+            user = users.get(0);
         }catch (Exception e){
             e.printStackTrace();
         }

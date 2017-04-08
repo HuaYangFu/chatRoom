@@ -42,14 +42,7 @@ function start() {
 function keyStart() {
     var e = window.event;
     if(e.keyCode == 13){
-        var content = document.getElementById("userinput").value;
-        var to = document.getElementById("to").value;
-        var json = JSON.stringify({
-            "to":to,
-            "content":content
-        });
-        webSocket.send(json);
-        return false;
+        start();
     }
 }
 

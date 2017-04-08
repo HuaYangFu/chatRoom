@@ -58,7 +58,6 @@ public class UserController {
             e.printStackTrace();
             MV.addObject("error","account is Duplicate please retry again");
             MV.setViewName("setup");
-            return MV;
         }
         return MV;
     }
