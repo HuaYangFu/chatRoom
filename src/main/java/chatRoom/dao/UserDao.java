@@ -39,12 +39,14 @@ public class UserDao {
     public User findUserByProvide(String account, char[] password) {
         User user = null;
         try {
-            String q = "from User where account = :account and password = :password";
+            String q =  "from "+User.class.getName()+" u " +
+                        "where u.account = :account " +
+                        "and u.password = :password";
             Query query = sessionFactory.getCurrentSession().createQuery(q);
             query.setParameter("account",account);
             query.setParameter("password",password);
             List<User> users = query.list();
-            user = users.get(0);
+            if (users != null && users.size() > 0) user = users.get(0);
         }catch (Exception e){
             e.printStackTrace();
         }
